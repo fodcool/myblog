@@ -1,0 +1,4 @@
+- title @post.title
+- meta_description(@post.intro)
+- meta_keywords(@post.tags.pluck(:name).join(','))
+= render 'show'

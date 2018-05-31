@@ -1,0 +1,50 @@
+-#- if current_user
+-#  = render 'share/avatar_setting'
+.left-bar
+  .panel.panel-default.panel-profile
+    .panel-heading
+    .panel-body.text-center
+      .avatar-content
+        = link_to root_path, class: 'blog-avatar' do
+          .ih-item.circle.effect15.left_to_right.header-circle
+            .img
+              %img{:src => "http://siweitech.b0.upaiyun.com/cms/2018-05-22-cool%201x1.jpeg"}
+      %h5.panel-title{ :style => "font-size: 24px;"}
+        = link_to 'Cool', root_path
+      %p.left-menu{ :style => "font-size: 18px;"}
+        - if Settings.blogine.enable_search
+          = link_to '搜索', search_path
+        - else
+          = link_to '首页', root_path
+        \/
+        = link_to '分类', columns_path
+        \/
+        = link_to '标签', tags_path
+        // obligate two item for manual config
+        - left_bar_menu = Settings.blogine.left_bar.menu
+        - if obligate_exists?(1)
+          \/
+          = link_to left_bar_menu.obligate_1_name, left_bar_menu.obligate_1_link
+        - if obligate_exists?(2)
+          \/
+          = link_to left_bar_menu.obligate_2_name, left_bar_menu.obligate_2_link
+      %p.social-account
+        -# cp layouts/_social_account.html.haml.example to _social_account.html.haml to add your own social accounts and style
+        = render 'layouts/social_account' if File.exists?("#{Dir.pwd}/app/views/layouts/_social_account.html.haml")
+
+    - if current_user
+      .sidebar-footer
+        = link_to 'https://zoker.io/blogine', class: 'has-tooltip', 'data-original-title' => '更新日志', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+          %span.fa.fa-rss{'aria-hidden' => 'true'}
+        = link_to new_admin_post_path, class: 'has-tooltip', 'data-original-title' => '发布博客', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+          %span.fa.fa-pencil{'aria-hidden' => 'true'}
+        = link_to admin_root_path, class: 'has-tooltip', 'data-original-title' => '管理后台', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+          %span.fa.fa-cogs{'aria-hidden' => 'true'}
+        = link_to logout_path, method: :delete, class: 'has-tooltip', 'data-original-title' => '退出登录', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+          %span.fa.fa-sign-out{'aria-hidden' => 'true'}
+    - else
+      .panel-footer
+        = link_to '//zoker.io/blogine', target: '_blank' do
+          Powered By
+          = image_tag '/logo.svg'
+

@@ -1,0 +1,31 @@
+// Place all the styles related to the Columns controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.filter-title{
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  color: #25a1a2;
+  padding: 10px 0;
+  .filter-name{
+    padding: 0 10px;
+  }
+}
+
+.columns-field{
+  h3{
+    .columns-count{
+      font-size: 16px;
+      font-style: italic;
+    }
+  }
+  a:hover{
+    color: #666;
+    text-decoration: none;
+  }
+  .bs-callout{
+    &:hover{
+      background-color: #f9f9f9;
+    }
+  }
+}

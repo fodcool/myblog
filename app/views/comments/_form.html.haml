@@ -1,0 +1,67 @@
+- @comment = Comment.new
+= form_for [target, @comment], remote: true, html: {onsubmit: "html_content();", id: (type == 'comment' ? 'new_comment' : 'new_reply')}  do |f|
+  .row
+    .col-md-4.col-sm-5
+      .form-group
+        .input-group
+          .input-group-addon
+            昵称
+          = f.text_field :creator_name, class: 'form-control', placeholder: '怎么称呼', required: true
+      .form-group
+        .input-group
+          .input-group-addon
+            邮箱
+          = f.text_field :creator_email, class: 'form-control has-tooltip', placeholder: '怎么联系',
+            required: true, onkeyup: "checkValid(this, 'email')", 'data-html' => 'true',
+            'data-original-title' => "<div class='email-notice'>请输入邮箱</div>",
+            'data-placement' => 'top', 'data-toggle' => 'tooltip'
+      .form-group
+        .input-group
+          .input-group-addon
+            网站
+          = f.text_field :creator_site, class: 'form-control has-tooltip', placeholder: '家在何方(选填)',
+            'data-original-title' => "<div class='url-notice'>请输入网站地址</div>", 'data-placement' => 'top',
+            'data-toggle' => 'tooltip', 'data-html' => 'true', onkeyup: "checkValid(this, 'url')"
+      - if Settings.blogine.enable_captcha
+        .form-group
+          .input-group
+            .input-group-addon
+              验证
+            = rucaptcha_input_tag(class: 'form-control', required: true)
+            .input-group-addon.captcha
+              = rucaptcha_image_tag(alt: 'Captcha')
+    .col-md-8.col-sm-7
+      .form-group
+        = f.text_area :content, class: 'form-control', placeholder: '说点什么吧！', rows: 6, required: true
+        = f.hidden_field :html_content
+        - if type == 'reply'
+          = f.hidden_field :parent_id
+      .actions
+        = f.submit "发表#{type == 'comment' ? '评论' : '回复'}", class: ' btn btn-primary'
+        - if type == 'reply'
+          = button_tag '取消', class: 'cancel-reply btn btn-default'
+
+:javascript
+  function html_content(){
+    $('#comment_html_content').val($('#comment_content').val())
+  }
+  $('.rucaptcha-image').click(function(){
+    $('.rucaptcha-image').attr('src', '/rucaptcha' + '?' + (new Date()).getTime())
+  })
+  function checkValid(element, type){
+    emailReg = /\w@\w*\.\w/
+    urlReg = /^([hH][tT]{2}[pP]:\/\/|[hH][tT]{2}[pP][sS]:\/\/)(([A-Za-z0-9-~]+)\.)+([A-Za-z0-9-~\/])+$/;
+    if(type == 'email'){
+      if(emailReg.test(element.value)){
+        $(element).closest('.input-group').find('.email-notice').text('邮箱格式正确')
+      }else{
+        $(element).closest('.input-group').find('.email-notice').text('请输入正确的邮箱')
+      }
+    }else if(type == 'url'){
+      if(urlReg.test(element.value)){
+        $(element).closest('.input-group').find('.url-notice').text('网站地址正确')
+      }else{
+        $(element).closest('.input-group').find('.url-notice').text('请输入正确的网站地址')
+      }
+    }
+  }

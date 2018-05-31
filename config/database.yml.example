@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  pool: 5
+  database: blogine
+  username: root
+  password: ""
+  timeout: 5000
+
+development:
+  <<: *default
+  database: blogine
+
+test:
+  <<: *default
+  database: blogine_test
+
+production:
+  <<: *default
+  database: blogine_production

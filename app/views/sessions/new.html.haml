@@ -1,0 +1,17 @@
+#login-field
+  .wrapper
+    = form_for :session, url: login_url, html: {class: 'form-signin'}, method: :post do |f|
+      %h3.form-signin-heading
+        = image_tag '/logo.svg'
+        后台管理
+      %hr.colorgraph
+      = f.text_field :login, class: "form-control", placeholder: "请输入邮箱或用户名"
+      = f.password_field :password, class: "form-control", placeholder: "请输入密码"
+      %div{'data-toggle' => 'buttons'}
+        %label.btn
+          = check_box_tag :'session[remember_me]'
+          %i.fa.fa-square-o
+          %i.fa.fa-check-square-o
+          %span
+            记住我
+      = f.submit "登陆", class: " btn btn-l陆", class: " btn btn-lg btn-primary btn-block"

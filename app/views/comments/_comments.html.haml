@@ -1,0 +1,70 @@
+#comments
+  %h3.comment-master 评论
+  - if comments.present?
+    .comments-container
+      %ul#comments-list.comments-list
+        - comments.each do |c|
+          %li
+            .comment-main-level
+              .comment-avatar
+                = image_tag comment_avatar(c.status, c.creator_email)
+              .comment-box
+                .comment-head
+                  .comment-name{class: author_class(c.status)}
+                    = link_to c.creator_name, c.creator_site, target: '_blank'
+                  .comment-others
+                    %span
+                      = c.created_at.localtime.to_formatted_s(:long)
+                    %i.fa.fa-reply.has-tooltip{onclick: "addReply(#{c.id}, #{c.id})" , 'data-original-title' => '回复', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
+                .comment-content
+                  = raw c.html_content
+            .reply-field{id: "reply-form-field-#{c.id}"}
+              .reply-form-area
+          %li
+            - if c.children.present?
+              %ul.comments-list.reply-list
+                - c.children.each do |child|
+                  %li
+                    .comment-avatar
+                      = image_tag comment_avatar(c.status, c.creator_email)
+                    .comment-box
+                      .comment-head
+                        .comment-name{class: author_class(child.status)}
+                          = link_to child.creator_name, child.creator_site, target: '_blank'
+                        .comment-others
+                          %span
+                            = child.created_at.localtime.to_formatted_s(:long)
+                          %i.fa.fa-reply.has-tooltip{onclick: "addReply(#{c.id}, #{child.id})", 'data-original-title' => '回复', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
+                      .comment-content
+                        = raw child.html_content
+                    .reply-field{id: "reply-form-field-#{child.id}"}
+                      .reply-form-area
+  - else
+    .no-comments
+      暂无相关评论，快来抢占沙发吧！
+  .callback-form
+    评论框离家出走了，点击找回！
+  .comment-form#comment-form-field
+    = render 'comments/form', target: target, type: 'comment'
+  .comment-form.reply-form#reply-form-field
+    = render 'comments/form', target: target, type: 'reply'
+
+:javascript
+  function addReply(id, pos_id){
+    $('#comment_parent_id').val(id)
+    $('#reply-form-field-' + pos_id).find('.reply-form-area').append($('#reply-form-field'));
+    $('#reply-form-field').show();
+    $('#new_comment').hide();
+    $('.callback-form').show()
+  }
+  $('.cancel-reply').click(function (){
+    $('#new_reply')[0].reset();
+    $('#reply-form-field').hide();
+    $('#new_comment').show();
+    $('.callback-form').hide()
+  })
+  $('.callback-form').click(function(){
+    $('#reply-form-field').hide();
+    $('#new_comment').show();
+    $('.callback-form').hide()
+  })

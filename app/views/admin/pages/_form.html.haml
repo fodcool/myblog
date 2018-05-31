@@ -1,0 +1,71 @@
+= javascript_include_tag 'mdeditor'
+= form_for [:admin, @page], html: {onsubmit: "html_content();"} do |f|
+  - if @page.errors.any?
+    #error_explanation.alert.alert-danger.alert-dismissible.fade.in
+      = button_tag class: 'close', 'data-dismiss' => 'alert', 'aria-label' => 'Close' do
+        %span{ 'aria-hidden' => 'true' }
+          x
+      %h4= "#{@page.errors.count} 个错误导致保存失败："
+      %ul
+        - @page.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.label :title, '页面标题'
+    = f.text_field :title, class: 'form-control', autofocus: true, required: true
+  .form-group
+    = f.label :path, '页面路径'
+    .input-group
+      %span.input-group-addon
+        https://#{Settings.blogine.host}/
+      = f.text_field :path, class: 'form-control', required: true
+  .form-group
+    = f.label :content, '页面内容'
+    -# a bug around haml whitespace, I have find some solutions: https://github.com/haml/haml/issues/643#issuecomment-255546050
+    = f.text_area :content, class: 'form-control'
+    = f.hidden_field :html_content
+    = f.hidden_field :status
+  .fixed-area
+    .content#pages_content
+      = button_tag '存为草稿', id: :submit_draft, class: 'btn btn-default btn-sm'
+      = button_tag '提交', id: :submit_form, class: 'btn btn-primary btn-sm'
+= javascript_include_tag 'admin/bootstrap-tagsinput.min'
+= javascript_include_tag 'admin/bootstrap3-typeahead.min'
+
+:javascript
+  window.onbeforeunload = function() {
+    return '';
+  }
+  $("#page_content").markdown({
+    language: 'zh',
+    imgurl: '/image',
+    base64url: '/image_base64',
+    fullscreen: {
+        enable: true
+    },
+    autofocus: false,
+    resize: 'vertical',
+    hiddenButtons: ['cmdEmoji'],
+    iconlibrary: 'fa'
+  });
+  $(document).ready(function() {
+    $("form input[name*='page']").bind("keypress", function(e) {
+      if (e.keyCode == 13) {
+          return false;
+      }
+    });
+  });
+  function html_content(){
+    $('#page_html_content').val(marked($('#page_content').val()))
+  }
+  $('#submit_form').click(function(){
+    $('#post_tags').val($('#tags').val())
+    window.onbeforeunload = null
+    $('form').submit()
+  })
+  $('#submit_draft').click(function(){
+    $('#post_tags').val($('#tags').val())
+    $('#post_status').val(1)
+    window.onbeforeunload = null
+    $('form').submit()
+  })

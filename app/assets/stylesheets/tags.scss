@@ -1,0 +1,36 @@
+// Place all the styles related to the Tags controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.filter-highlight{
+  background-color: #25a1a2;
+}
+
+.tags-field{
+  h3{
+    padding-left: 0.5rem;
+    .tags-count{
+      font-size: 16px;
+      font-style: italic;
+    }
+  }
+  .btn-group{
+    .tag-name{
+      font-weight: 500;
+    }
+    margin: 8px;
+    &:hover{
+      border-radius: 5px;
+      .btn-default{
+        background-color: #25a1a2;
+        color: #fff;
+        border: 1px solid #fff;
+      }
+    }
+  }
+
+  .btn:hover{
+    background: none;
+    border-color: #ccc;
+  }
+
+}

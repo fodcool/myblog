@@ -1,0 +1,136 @@
+#wrapper{
+  .navbar-brand{
+    img{
+      height: 30px;
+      display: inline;
+      margin-right: 5px;
+    }
+  }
+  .sidebar-footer {
+    bottom: 0px;
+    clear: both;
+    display: block;
+    padding: 5px 0 0 0;
+    position: fixed;
+    width: 225px;
+    background: #222;
+    a {
+      color: #555;
+      padding: 7px 0 3px;
+      cursor: pointer;
+      text-align: center;
+      width: 33.33%;
+      font-size: 17px;
+      display: block;
+      float: left;
+      background: rgba(0, 0, 0, 0.4);
+      &:hover {
+        background: #333333;
+        text-decoration: none;
+      }
+    }
+  }
+  #page-wrapper{
+    padding-top: 20px;
+    padding: 15px;
+    width: 99%;
+    #welcome-intro{
+      .active{
+        color: #333;
+      }
+      .username{
+        font-weight: bolder;
+        padding-right: 5px;
+      }
+    }
+    .operation-fa-pr3{
+      padding-right: 3px;
+      color: #888;
+    }
+    .operate-icons{
+      .has-tooltip{
+        color: #888;
+        cursor: pointer;
+      }
+    }
+    .label{
+      text-shadow: inherit;
+    }
+    #admin-post-index{
+      .tags-cell{
+        width: 20%;
+        a{
+          display: inline-block;
+          &:hover{
+            text-decoration: none;
+          }
+        }
+        .label {
+          padding: .1em .3em;
+        }
+        .label-default {
+          background-color: #7d7d7d;
+        }
+      }
+    }
+    #admin-column-index{
+      .columns-create-field{
+        display: none;
+      }
+      .add-columns-btn{
+        cursor: pointer;
+      }
+    }
+    #admin-tag-index{
+      .tags-create-field{
+        display: none;
+      }
+      .add-tags-btn{
+        cursor: pointer;
+      }
+    }
+    #admin-comment-index{
+      .verfy-button{
+        display: inline;
+      }
+      .operation{
+        a:hover{
+          text-decoration: none;
+        }
+      }
+    }
+    #admin-setting-index{
+      code{
+        margin: 0px 5px;
+      }
+    }
+    .bootstrap-tagsinput{
+      width: 100%;
+      input{
+        width: 150px;
+      }
+    }
+    .td-button{
+      padding: 0 10px;
+      .table-bottom-btn{
+        line-height: 35px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+  .create-blog {
+    color: #3de1e2;
+  }
+}
+@media screen and (max-width: 980px) {
+  #wrapper{
+    .hidden-area{
+      display: none;
+    }
+    #page-wrapper{
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+  }
+}
