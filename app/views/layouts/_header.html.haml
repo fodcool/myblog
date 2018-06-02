@@ -1,6 +1,8 @@
 -#- if current_user
 -#  = render 'share/avatar_setting'
 .left-bar
+  %iframe{:allow => "autoplay", :border => "0", :frameborder => "no", :height => "52", :marginheight => "0", :marginwidth => "0",
+    :src => Settings.blogine.music_url, :width => "298", :style => "margin-top: 20px;"}
   .panel.panel-default.panel-profile
     .panel-heading
     .panel-body.text-center
@@ -34,17 +36,17 @@
 
     - if current_user
       .sidebar-footer
-        = link_to 'https://zoker.io/blogine', class: 'has-tooltip', 'data-original-title' => '更新日志', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+        = link_to 'http://www.wenyc.cn', class: 'has-tooltip', target: '_blank', 'data-original-title' => '打开原博客', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
           %span.fa.fa-rss{'aria-hidden' => 'true'}
-        = link_to new_admin_post_path, class: 'has-tooltip', 'data-original-title' => '发布博客', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+        = link_to new_admin_post_path, class: 'has-tooltip', target: '_blank', 'data-original-title' => '发布博客', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
           %span.fa.fa-pencil{'aria-hidden' => 'true'}
-        = link_to admin_root_path, class: 'has-tooltip', 'data-original-title' => '管理后台', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
+        = link_to admin_root_path, class: 'has-tooltip', target: '_blank', 'data-original-title' => '管理后台', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
           %span.fa.fa-cogs{'aria-hidden' => 'true'}
         = link_to logout_path, method: :delete, class: 'has-tooltip', 'data-original-title' => '退出登录', 'data-placement' => 'top', 'data-toggle' => 'tooltip' do
           %span.fa.fa-sign-out{'aria-hidden' => 'true'}
     - else
       .panel-footer
-        = link_to '//zoker.io/blogine', target: '_blank' do
+        = link_to 'http://blog.wenyc.cn', target: '_blank' do
           Powered By
           = image_tag '/logo.svg'
 

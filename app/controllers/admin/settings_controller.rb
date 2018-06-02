@@ -8,6 +8,7 @@ class Admin::SettingsController < Admin::ApplicationController
     blogine = config['production']['blogine']
     blogine['site_name'] = params[:site_name] if params[:site_name].present?
     blogine['author_name'] = params[:author_name] if params[:author_name].present?
+    blogine['music_url'] = params[:music_url] if params[:music_url].present?
     blogine['host'] = params[:host] if params[:host].present?
     blogine['description'] = params[:description] if params[:description].present?
     blogine['keywords'] = params[:keywords] if params[:keywords].present?

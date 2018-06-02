@@ -206,7 +206,7 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
       border: none;
       background: none;
       .panel-heading {
-        height: 150px;
+        height: 100px;
         background: none;
         border: none;
       }
@@ -242,8 +242,8 @@ $callout-lists: (-gray: #777, -green: #5cb85c, -blue: #428bca, -red: #d9534f, -y
           cursor: pointer;
           z-index: 10;
           color: #fff;
-          &:hover { 
-            display: block; 
+          &:hover {
+            display: block;
           }
         }
         .avatar-content{

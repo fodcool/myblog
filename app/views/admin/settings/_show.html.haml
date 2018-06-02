@@ -13,9 +13,18 @@
       config/blogine.yml
     配置文件进行改动，你也可以自行修改这个文件进行配置，但手动更改配置文件记得重启应用哦。
   = form_for admin_settings_path do
-    .form-group
-      = label_tag :site_name, '博客名'
-      = text_field_tag :site_name, Settings.blogine.site_name, class: 'form-control'
+    .row
+      .col-md-6
+        .form-group
+          = label_tag :site_name, '博客名'
+          = text_field_tag :site_name, Settings.blogine.site_name, class: 'form-control'
+      .col-md-6
+        .form-group
+          = label_tag :music_url, '网易云音乐外链'
+          .input-group
+            .input-group-addon
+              http:
+            = text_field_tag :music_url, Settings.blogine.music_url, class: 'form-control'
     .row
       .col-md-6
         .form-group
