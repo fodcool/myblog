@@ -11,6 +11,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post.page_view_count += 1
+    @post.save
     @comments = @post.comments.unconcealed.includes(:children)
   end
 
