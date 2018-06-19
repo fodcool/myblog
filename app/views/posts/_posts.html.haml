@@ -11,13 +11,17 @@
       .post-item
         .post-title
           = link_to post do
-            = post.title + " (#{post.page_view_count})"
+            = post.title
         .post-intro
           = post.intro
         .post-detail
           .detail-item
             .fa.fa-clock-o.fa-pr5
               = post.created_at.localtime.to_formatted_s(:long)
+          .detail-item
+            .fa.fa-users.fa-pr5
+              访问量:
+              = post.page_view_count
           .detail-item
             = link_to "#{post_path(post)}#comments" , target: '_blank' do
               .fa.fa-comments-o.fa-pr5
