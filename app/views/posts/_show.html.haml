@@ -36,7 +36,10 @@
       摘要：
       = @post.intro
   .markdown-body
-    = raw @post.html_content
+    - if @post.tags.where("name = ?","editor_html").count > 0
+      = raw @post.content
+    - else
+      = raw @post.html_content
 
 = render 'layouts/copyright', target: @post
 = render 'comments/comments', target: @post, comments: @comments
