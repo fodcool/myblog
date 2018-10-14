@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     @posts = Post.releases
     @posts = @posts.unconcealed if current_user.blank?
     @posts = @posts.where("title Like ? or content Like ?", "%#{params[:query]}%", "%#{params[:query]}%") if params[:query].present?
-    @posts = @posts.sorted_by_created.includes(:tags, :column).page(params[:page]).per(20)
+    @posts = @posts.sorted_by_created.includes(:tags, :column).page(params[:page]).per(40)
   end
 
   def show
