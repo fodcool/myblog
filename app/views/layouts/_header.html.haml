@@ -27,9 +27,9 @@
         - if obligate_exists?(1)
           \/
           = link_to left_bar_menu.obligate_1_name, left_bar_menu.obligate_1_link
-        - if obligate_exists?(2)
-          \/
-          = link_to left_bar_menu.obligate_2_name, left_bar_menu.obligate_2_link
+        -#- if obligate_exists?(2)
+        -#  \/
+        -#  = link_to left_bar_menu.obligate_2_name, left_bar_menu.obligate_2_link
       %p.social-account
         -# cp layouts/_social_account.html.haml.example to _social_account.html.haml to add your own social accounts and style
         = render 'layouts/social_account' if File.exists?("#{Dir.pwd}/app/views/layouts/_social_account.html.haml")
